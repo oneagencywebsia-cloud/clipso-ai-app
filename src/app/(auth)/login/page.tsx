@@ -16,22 +16,27 @@ export default function LoginPage() {
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    const supabase = createClient();
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    setLoading(false);
-    if (error) {
-      if (error.message.includes("Invalid login credentials")) {
-        toast.error("Email o contraseña incorrectos.");
-      } else if (error.message.includes("Email not confirmed")) {
-        toast.error("Confirma tu email antes de iniciar sesión.");
-      } else {
-        toast.error(error.message);
+    try {
+      const supabase = createClient();
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) {
+        if (error.message.includes("Invalid login credentials")) {
+          toast.error("Email o contraseña incorrectos.");
+        } else if (error.message.includes("Email not confirmed")) {
+          toast.error("Confirma tu email antes de iniciar sesión.");
+        } else {
+          toast.error(error.message);
+        }
+        return;
       }
-      return;
+      toast.success("Bienvenido");
+      router.push("/dashboard");
+      router.refresh();
+    } catch (err: any) {
+      toast.error(err.message ?? "Error al iniciar sesión.");
+    } finally {
+      setLoading(false);
     }
-    toast.success("Bienvenido");
-    router.push("/dashboard");
-    router.refresh();
   }
 
   return (

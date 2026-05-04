@@ -17,23 +17,28 @@ export default function SignupPage() {
   async function handleSignup(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    const supabase = createClient();
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: { data: { full_name: name } }
-    });
-    setLoading(false);
-    if (error) {
-      if (error.message.includes("already registered")) {
-        toast.error("Este email ya está registrado. Intenta iniciar sesión.");
-      } else {
-        toast.error(error.message);
+    try {
+      const supabase = createClient();
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { data: { full_name: name } }
+      });
+      if (error) {
+        if (error.message.includes("already registered")) {
+          toast.error("Este email ya está registrado. Intenta iniciar sesión.");
+        } else {
+          toast.error(error.message);
+        }
+        return;
       }
-      return;
+      toast.success("Cuenta creada. Revisa tu email para confirmar.");
+      router.push("/login");
+    } catch (err: any) {
+      toast.error(err.message ?? "Error al crear la cuenta.");
+    } finally {
+      setLoading(false);
     }
-    toast.success("Cuenta creada. Revisa tu email para confirmar.");
-    router.push("/login");
   }
 
   return (
