@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Player, PlayerRef } from "@remotion/player";
+import { Player, PlayerRef, CallbackListener } from "@remotion/player";
 import { mockTimeline } from "../mocks/mockTimeline";
 import { TimelineComposer } from "./TimelineComposer";
 import { DirectorTimeline } from "../types/timeline";
@@ -46,9 +46,9 @@ export const ClipsoPlayer: React.FC<ClipsoPlayerProps> = ({
   useEffect(() => {
     const player = playerRef.current;
     if (!player) return;
-    const handler = (e: { detail: { frame: number } }) => setCurrentFrame(e.detail.frame);
-    player.addEventListener("timeupdate", handler as EventListener);
-    return () => player.removeEventListener("timeupdate", handler as EventListener);
+    const handler: CallbackListener<"timeupdate"> = ({ detail }) => setCurrentFrame(detail.frame);
+    player.addEventListener("timeupdate", handler);
+    return () => player.removeEventListener("timeupdate", handler);
   }, []);
 
   const { fps, durationFrames, aspectRatio } = timeline.meta;
