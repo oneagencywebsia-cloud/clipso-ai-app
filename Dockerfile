@@ -12,8 +12,8 @@ RUN apk add --no-cache \
     ca-certificates \
     ttf-freefont
 
-COPY package.json package-lock.json* ./
-RUN npm ci --legacy-peer-deps
+COPY package.json ./
+RUN npm install --legacy-peer-deps
 
 # ── Stage 2: Build Next.js standalone ────────────────────────────────────────
 FROM node:20-alpine AS builder
