@@ -106,12 +106,6 @@ async function main() {
         const mapped = 35 + Math.round(progress * 63);
         process.stdout.write(`PROGRESS:${mapped}\n`);
       },
-      onSlowestFrames: (frames) => {
-        // Telemetría de frames lentos — útil para optimización futura
-        if (frames.length > 0) {
-          process.stderr.write(`Slowest frames: ${frames.map((f) => f.frame).join(", ")}\n`);
-        }
-      },
     });
   } catch (err) {
     process.stdout.write(`ERROR:renderMedia failed — ${(err as Error).message}\n`);
