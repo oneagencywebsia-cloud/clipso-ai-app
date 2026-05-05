@@ -42,13 +42,25 @@ export const ClipsoPlayer: React.FC<ClipsoPlayerProps> = ({
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentFrame, setCurrentFrame] = useState(0);
 
-  // En @remotion/player v4 onFrameUpdate no existe — se usa el evento timeupdate vía ref
+  // En @remotion/player v4 los eventos no son props — se suscriben vía addEventListener
   useEffect(() => {
     const player = playerRef.current;
     if (!player) return;
-    const handler: CallbackListener<"timeupdate"> = ({ detail }) => setCurrentFrame(detail.frame);
-    player.addEventListener("timeupdate", handler);
-    return () => player.removeEventListener("timeupdate", handler);
+
+    const onTimeUpdate: CallbackListener<"timeupdate"> = ({ detail }) =>
+      setCurrentFrame(detail.frame);
+    const onPlay: CallbackListener<"play">  = () => setIsPlaying(true);
+    const onPause: CallbackListener<"pause"> = () => setIsPlaying(false);
+
+    player.addEventListener("timeupdate", onTimeUpdate);
+    player.addEventListener("play",       onPlay);
+    player.addEventListener("pause",      onPause);
+
+    return () => {
+      player.removeEventListener("timeupdate", onTimeUpdate);
+      player.removeEventListener("play",       onPlay);
+      player.removeEventListener("pause",      onPause);
+    };
   }, []);
 
   const { fps, durationFrames, aspectRatio } = timeline.meta;
@@ -132,8 +144,6 @@ export const ClipsoPlayer: React.FC<ClipsoPlayerProps> = ({
           showVolumeControls={false}
           controls={false}
           loop
-          onPlay={() => setIsPlaying(true)}
-          onPause={() => setIsPlaying(false)}
         />
       </div>
 
