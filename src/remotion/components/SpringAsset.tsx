@@ -55,7 +55,7 @@ export const SpringAsset: React.FC<SpringAssetProps> = ({
       // Highlight: suave, sin overshoot
       resolvedOptions.springConfig = { stiffness: 120, damping: 28, mass: 1.2 };
       resolvedOptions.initialOffsetY = 15;
-    } else if (animationStyle === "slide_left") {
+    } else if (animationStyle === "slide") {
       resolvedOptions.springConfig = { stiffness: 200, damping: 22, mass: 1.0 };
       resolvedOptions.initialOffsetY = 0;
     } else if (animationStyle === "fade") {

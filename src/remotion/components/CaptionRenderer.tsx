@@ -63,14 +63,14 @@ const ChunkDisplay: React.FC<{
     chunk.springConfig ??
     (chunk.isEmphasis
       ? SPRING_PRESETS.aggressive
-      : chunk.importanceScore >= 0.75
+      : chunk.importanceScore >= 8
       ? SPRING_PRESETS.standard
       : SPRING_PRESETS.smooth);
 
   // Rotación de entrada solo para chunks de alto impacto
   const initialRotation =
     chunk.entryRotation ??
-    (chunk.importanceScore >= 0.82 ? -2.5 : 0);
+    (chunk.importanceScore >= 8 ? -2.5 : 0);
 
   const fontSize = `${chunk.fontSizePct}vh`;
 
@@ -119,7 +119,7 @@ const ChunkDisplay: React.FC<{
                 WebkitTextStroke: chunk.isEmphasis ? "2px rgba(0,0,0,0.5)" : "1px rgba(0,0,0,0.3)",
                 // Escala extra para palabras de alta importancia individual
                 display: "inline-block",
-                transform: wordImportance >= 0.9 ? "scale(1.08)" : "scale(1)",
+                transform: wordImportance >= 9 ? "scale(1.08)" : "scale(1)",
                 transformOrigin: "center bottom",
               }}
             >

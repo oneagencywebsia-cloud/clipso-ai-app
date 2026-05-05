@@ -178,9 +178,9 @@ const OverlayRenderer: React.FC<{
   // Seleccionar preset de spring según animationStyle e importanceScore
   const springConfig =
     overlay.springConfig ??
-    (overlay.importanceScore >= 0.85
+    (overlay.importanceScore >= 9
       ? SPRING_PRESETS.aggressive
-      : overlay.importanceScore >= 0.65
+      : overlay.importanceScore >= 7
       ? SPRING_PRESETS.standard
       : SPRING_PRESETS.smooth);
 
@@ -203,7 +203,7 @@ const OverlayRenderer: React.FC<{
             startFrame={0} // relativo al Sequence — frame 0 = overlay.startFrame absoluto
             springConfig={springConfig}
             animationStyle={overlay.animationStyle}
-            initialRotation={overlay.importanceScore >= 0.82 ? -2.5 : 0}
+            initialRotation={overlay.importanceScore >= 8 ? -2.5 : 0}
           >
             <OverlayContent overlay={overlay} />
           </SpringAsset>
