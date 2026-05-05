@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Player, PlayerRef } from "@remotion/player";
 import { mockTimeline } from "../mocks/mockTimeline";
 import { TimelineComposer } from "./TimelineComposer";
@@ -41,6 +41,15 @@ export const ClipsoPlayer: React.FC<ClipsoPlayerProps> = ({
   const playerRef = useRef<PlayerRef>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentFrame, setCurrentFrame] = useState(0);
+
+  // En @remotion/player v4 onFrameUpdate no existe — se usa el evento timeupdate vía ref
+  useEffect(() => {
+    const player = playerRef.current;
+    if (!player) return;
+    const handler = (e: { detail: { frame: number } }) => setCurrentFrame(e.detail.frame);
+    player.addEventListener("timeupdate", handler as EventListener);
+    return () => player.removeEventListener("timeupdate", handler as EventListener);
+  }, []);
 
   const { fps, durationFrames, aspectRatio } = timeline.meta;
   const { width, height } = DIMENSIONS[aspectRatio] ?? DIMENSIONS["9:16"];
@@ -123,7 +132,6 @@ export const ClipsoPlayer: React.FC<ClipsoPlayerProps> = ({
           showVolumeControls={false}
           controls={false}
           loop
-          onFrameUpdate={(f) => setCurrentFrame(f)}
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
         />
