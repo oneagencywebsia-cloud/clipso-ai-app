@@ -2,7 +2,7 @@
 
 import React, { useCallback, useRef, useState } from "react";
 import { Player, PlayerRef } from "@remotion/player";
-import { mockTimeline } from "../mockTimeline";
+import { mockTimeline } from "../mocks/mockTimeline";
 import { TimelineComposer } from "./TimelineComposer";
 import { DirectorTimeline } from "../types/timeline";
 

@@ -1,0 +1,238 @@
+import { DirectorTimeline, SPRING_PRESETS } from "../types/timeline";
+
+export const mockTimeline: DirectorTimeline = {
+  schemaVersion: "5.0",
+  jobId: "angel-one-agency-001",
+
+  meta: {
+    title: "Para escalar tu agencia, el secreto es la IA",
+    tone: "energico",
+    pace: "rapido",
+    summary: "El secreto para escalar tu agencia no es trabajar más, sino automatizar con IA.",
+    language: "es",
+    durationFrames: 150,
+    fps: 30,
+    aspectRatio: "9:16",
+  },
+
+  tracks: {
+    // ── PISTA 1: VIDEO ──────────────────────────────────────────────────────────
+    video: {
+      src: "/video/source.mp4",
+      durationFrames: 150,
+      colorGrading: "vibrante",
+      applyJumpCuts: false,
+      aspectRatio: "9:16",
+      zoomEvents: [
+        {
+          startFrame: 6,        // t = 0.2s — "escalar" (importanceScore 10)
+          scalePeak: 1.22,
+          framesIn: 6,
+          framesHold: 12,
+          framesOut: 6,
+          importanceScore: 10,
+        },
+        {
+          startFrame: 108,      // t = 3.6s — "automatizar"
+          scalePeak: 1.18,
+          framesIn: 6,
+          framesHold: 15,
+          framesOut: 6,
+          importanceScore: 8,
+        },
+      ],
+    },
+
+    // ── PISTA 2: TEXTO / SUBTÍTULOS ─────────────────────────────────────────────
+    text: {
+      preset: "tiktok_yellow",
+      highlightKeywords: ["ESCALAR", "SECRETO", "AUTOMATIZAR", "IA"],
+      verticalPosition: 0.72,
+      chunks: [
+        {
+          id: "chunk-001",
+          text: "Para escalar",
+          words: [
+            { word: "Para",    startFrame: 0,  endFrame: 6,  importanceScore: 3,  requiresSfx: false },
+            { word: "escalar", startFrame: 6,  endFrame: 15, importanceScore: 10, animationStyle: "pop", requiresSfx: true, sfxType: "pop" },
+          ],
+          startFrame: 0,
+          endFrame: 15,
+          fontSizePct: 7.5,
+          baseColor: "#FFFFFF",
+          highlightColor: "#FFFF00",
+          animationStyle: "pop",
+          springConfig: SPRING_PRESETS.aggressive,
+          isEmphasis: true,
+          importanceScore: 10,
+          entryRotation: -2,
+        },
+        {
+          id: "chunk-002",
+          text: "tu agencia,",
+          words: [
+            { word: "tu",       startFrame: 15, endFrame: 18, importanceScore: 2, requiresSfx: false },
+            { word: "agencia,", startFrame: 18, endFrame: 30, importanceScore: 5, requiresSfx: false },
+          ],
+          startFrame: 15,
+          endFrame: 30,
+          fontSizePct: 7.5,
+          baseColor: "#FFFFFF",
+          highlightColor: "#FFFF00",
+          animationStyle: "slide",
+          isEmphasis: false,
+          importanceScore: 4,
+          entryRotation: 0,
+        },
+        {
+          id: "chunk-003",
+          text: "el SECRETO",
+          words: [
+            { word: "el",      startFrame: 30, endFrame: 33, importanceScore: 2,  requiresSfx: false },
+            { word: "secreto", startFrame: 33, endFrame: 45, importanceScore: 10, animationStyle: "pop", requiresSfx: true, sfxType: "ding" },
+          ],
+          startFrame: 30,
+          endFrame: 45,
+          fontSizePct: 7.5,
+          baseColor: "#FFFFFF",
+          highlightColor: "#FF4444",
+          animationStyle: "pop",
+          springConfig: SPRING_PRESETS.aggressive,
+          isEmphasis: true,
+          importanceScore: 10,
+          entryRotation: -2.5,
+        },
+        {
+          id: "chunk-004",
+          text: "no es",
+          words: [
+            { word: "no", startFrame: 45, endFrame: 51, importanceScore: 5, requiresSfx: false },
+            { word: "es", startFrame: 51, endFrame: 57, importanceScore: 2, requiresSfx: false },
+          ],
+          startFrame: 45,
+          endFrame: 57,
+          fontSizePct: 7.5,
+          baseColor: "#FFFFFF",
+          highlightColor: "#FFFF00",
+          animationStyle: "slide",
+          isEmphasis: false,
+          importanceScore: 4,
+          entryRotation: 0,
+        },
+        {
+          id: "chunk-005",
+          text: "trabajar más.",
+          words: [
+            { word: "trabajar", startFrame: 57, endFrame: 69, importanceScore: 4, requiresSfx: false },
+            { word: "más.",     startFrame: 69, endFrame: 84, importanceScore: 3, requiresSfx: false },
+          ],
+          startFrame: 57,
+          endFrame: 84,
+          fontSizePct: 7.5,
+          baseColor: "#FFFFFF",
+          highlightColor: "#FFFF00",
+          animationStyle: "slide",
+          isEmphasis: false,
+          importanceScore: 4,
+          entryRotation: 0,
+        },
+        {
+          id: "chunk-006",
+          text: "El SECRETO es",
+          words: [
+            { word: "El",      startFrame: 84,  endFrame: 90,  importanceScore: 2,  requiresSfx: false },
+            { word: "secreto", startFrame: 90,  endFrame: 102, importanceScore: 10, animationStyle: "pop", requiresSfx: true, sfxType: "ding" },
+            { word: "es",      startFrame: 102, endFrame: 108, importanceScore: 2,  requiresSfx: false },
+          ],
+          startFrame: 84,
+          endFrame: 108,
+          fontSizePct: 7.5,
+          baseColor: "#FFFFFF",
+          highlightColor: "#FF4444",
+          animationStyle: "pop",
+          springConfig: SPRING_PRESETS.aggressive,
+          isEmphasis: true,
+          importanceScore: 10,
+          entryRotation: -1.5,
+        },
+        {
+          id: "chunk-007",
+          text: "automatizar",
+          words: [
+            { word: "automatizar", startFrame: 108, endFrame: 129, importanceScore: 7, animationStyle: "slide", requiresSfx: false },
+          ],
+          startFrame: 108,
+          endFrame: 129,
+          fontSizePct: 7.5,
+          baseColor: "#FFFFFF",
+          highlightColor: "#FFFF00",
+          animationStyle: "slide",
+          isEmphasis: false,
+          importanceScore: 7,
+          entryRotation: 0,
+        },
+        {
+          id: "chunk-008",
+          text: "con IA.",
+          words: [
+            { word: "con", startFrame: 129, endFrame: 135, importanceScore: 2,  requiresSfx: false },
+            { word: "IA.", startFrame: 135, endFrame: 150, importanceScore: 10, animationStyle: "pop", requiresSfx: true, sfxType: "impact_high" },
+          ],
+          startFrame: 129,
+          endFrame: 150,
+          fontSizePct: 7.5,
+          baseColor: "#FFFFFF",
+          highlightColor: "#00E5FF",
+          animationStyle: "pop",
+          springConfig: SPRING_PRESETS.aggressive,
+          isEmphasis: true,
+          importanceScore: 10,
+          entryRotation: 2,
+        },
+      ],
+    },
+
+    // ── PISTA 3: OVERLAYS ───────────────────────────────────────────────────────
+    overlays: {
+      overlays: [
+        {
+          id: "overlay-001",
+          type: "lower_third",
+          startFrame: 0,
+          durationFrames: 45,
+          position: { x: 0.5, y: 0.88 },
+          animationStyle: "slide",
+          springConfig: SPRING_PRESETS.gentle,
+          importanceScore: 6,
+          sfxSync: "swoosh",
+          title: "Ángel",
+          subtitle: "O.N.E Agency",
+          accentColor: "#FFFF00",
+        },
+      ],
+    },
+
+    // ── PISTA 4: AUDIO ──────────────────────────────────────────────────────────
+    audio: {
+      sfxEvents: [
+        { id: "sfx-001", sfxType: "swoosh",      startFrame: 0,   volume: 0.35, trigger: "manual"  },
+        { id: "sfx-002", sfxType: "whoosh",      startFrame: 6,   volume: 0.50, trigger: "zoom"    },
+        { id: "sfx-003", sfxType: "pop",         startFrame: 6,   volume: 0.45, trigger: "keyword" },
+        { id: "sfx-004", sfxType: "ding",        startFrame: 33,  volume: 0.40, trigger: "keyword" },
+        { id: "sfx-005", sfxType: "ding",        startFrame: 90,  volume: 0.42, trigger: "keyword" },
+        { id: "sfx-006", sfxType: "whoosh",      startFrame: 108, volume: 0.48, trigger: "zoom"    },
+        { id: "sfx-007", sfxType: "impact_high", startFrame: 135, volume: 0.65, trigger: "keyword" },
+      ],
+      music: {
+        trackName: "upbeat_energetic",
+        volume: 0.10,
+        fadeInFrames: 30,
+        fadeOutFrames: 30,
+      },
+      ambient: {
+        trackName: "tiktok_ambient_beat",
+        volume: 0.05,
+      },
+    },
+  },
+};
